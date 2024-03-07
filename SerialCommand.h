@@ -45,6 +45,7 @@
 class SerialCommand {
   public:
     SerialCommand();      // Constructor
+    SerialCommand(Stream *serial_port);      // Constructor
     void addCommand(const char *command, void(*function)());  // Add a command to the processing dictionary.
     void setDefaultHandler(void (*function)(const char *));   // A handler to call when no valid command received.
 
@@ -70,6 +71,7 @@ class SerialCommand {
     char buffer[SERIALCOMMAND_BUFFER + 1]; // Buffer of stored characters while waiting for terminator character
     byte bufPos;                        // Current position in the buffer
     char *last;                         // State variable used by strtok_r during processing
+    Stream *_serial_port;
 };
 
 #endif //SerialCommand_h
